@@ -1,10 +1,11 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/usuario.model')
-const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+const Modelo = require('../models/usuarios.model')
+const bcrypt = require('bcrypt')
+const controller = {}
 
-const getUsuarios = async (req, res) => {
+controller.getUsuarios = async (req, res) => {
   try {
-    const usuarios = await User.find({ estado: true })
+    const usuarios = await Modelo.find({ estado: true })
     if (usuarios) {
       return res.status(200).json(usuarios);
     }else{
@@ -15,15 +16,15 @@ const getUsuarios = async (req, res) => {
   }
 }
 
-const getUsuario = async (req, res) => {
+controller.getUsuario = async (req, res) => {
   try {
     const token = req.header('auth-token')
     const { id } = jwt.verify(token, process.env.FIRMA)
-    const user = await User.findById(req.params.id)
+    const user = await Modelo.findById(req.params.id)
     
     // un usuario puede ver sus datos
     if(id == user._id) {
-        return res.status(200).json(user);
+        return res.status(200).json(user)
     } else {
       return res.status(203).json({ message: 'La información que solicita no está disponible' })
     }
@@ -32,28 +33,12 @@ const getUsuario = async (req, res) => {
   }
 }
 
-const getUbicaciones = async (req, res) => {
+controller.postUsuario = async (req, res) => {
   try {
-    const token = req.header('auth-token')
-    const { id } = jwt.verify(token, process.env.FIRMA)
-    const user = await User.findById(req.params.id)
-
-    if (id == user._id) {
-      return res.status(200).json({ubicaciones: user.ubicaciones})
-    } else {
-      return res.status(203).json({ message: 'La información que solicita no está disponible' })
-    }    
-  } catch (error) {
-    return res.status(500).json(error)
-  }
-}
-
-const postUsuario = async (req, res) => {
-  try {
-    const { usuario, clave, correo, rol, ubicaciones } = req.body
+    const { apellidos, nombres, dni, sexo, direccion, clave } = req.body
     const newClave = await bcrypt.hash(clave, 10)
-    const newUser = new User({
-      usuario, correo, rol, ubicaciones, clave: newClave
+    const newUser = new Modelo({
+      apellidos, nombres, dni, sexo, direccion, clave: newClave
     })
     await newUser.save()
     return res.status(201).json({ message: 'El usuario ha sido creado correctamente' })
@@ -62,15 +47,15 @@ const postUsuario = async (req, res) => {
   }
 }
 
-const putUsuario = async (req, res) => {
+controller.putUsuario = async (req, res) => {
   try {
     const token = req.header('auth-token')
     const { id } = jwt.verify(token, process.env.FIRMA)
-    const user = await User.findById(req.params.id)
+    const user = await Modelo.findById(req.params.id)
 
     if (id == user._id) {
       const newClave = await bcrypt.hash(clave, 10)
-      await User.findByIdAndUpdate(id, { usuario, correo, rol, ubicaciones, clave: newClave })
+      await Modelo.findByIdAndUpdate(id, { apellidos, nombres, dni, sexo, direccion, clave: newClave })
       return res.status(200).json({ message: 'Los datos han sido modificado correctamente' })
     } else {
       return res.status(203).json({ message: 'La información que solicita no está disponible' })
@@ -80,14 +65,14 @@ const putUsuario = async (req, res) => {
   }
 }
 
-const deleteUsuario = async (req, res) => {
+controller.deleteUsuario = async (req, res) => {
   try {
     const token = req.header('auth-token')
     const { id } = jwt.verify(token, process.env.FIRMA)
-    const user = await User.findById(req.params.id)
+    const user = await Modelo.findById(req.params.id)
     
     if (id == user._id || user.rol == "admin") {
-      await User.findByIdAndUpdate(id, { estado: false })
+      await Modelo.findByIdAndUpdate(id, { estado: false })
       return res.status(200).json({ message: 'EL usuario ha sido inhabilitado correctamente' })
     }
   } catch (error) {
@@ -95,6 +80,4 @@ const deleteUsuario = async (req, res) => {
   }
 }
 
-module.exports = {
-  getUsuarios, getUsuario, postUsuario, putUsuario, deleteUsuario, getUbicaciones
-}
+module.exports = controller

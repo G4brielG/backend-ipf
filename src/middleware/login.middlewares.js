@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Usuarios = require('../models/usuario.model')
+const Modelo = require('../models/usuarios.model')
 const middleware = {};
 
 middleware.validateLogin = async (req, res, next) => {
@@ -13,7 +13,7 @@ middleware.validateLogin = async (req, res, next) => {
     const { id } = jwt.verify(token, process.env.FIRMA)
 
     if (id) {
-      const usuario = await Usuarios.find({ _id: id})
+      const usuario = await Modelo.find({ _id: id})
 
       if (usuario) {
         if (usuario.estado === false) {
@@ -33,7 +33,7 @@ middleware.validateAdmin = async (req, res, next) => {
   const token = req.header('auth-token')
   const { id } = jwt.verify(token, process.env.FIRMA)
 
-  const user = await Usuarios.findOne({ _id: id })
+  const user = await Modelo.findOne({ _id: id })
   
   if (user) {
     if (user.rol === 'admin') {

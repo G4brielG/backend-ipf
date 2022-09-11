@@ -10,8 +10,11 @@ app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: false }))
 
 // Rutes
-app.use('/usuarios', require('./routes/usuarios.routes'))
 app.use('/login', require('./routes/login.routes'))
+app.use('/usuarios', require('./routes/usuarios.routes'))
+app.use('/carreras', require('./routes/carreras.routes'))
+app.use('/materias', require('./routes/materias.routes'))
+app.use('/docentes', require('./routes/docentes.routes'))
 
 // Settings
 app.set('port', process.env.PORT || 4000)

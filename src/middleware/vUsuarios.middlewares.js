@@ -2,12 +2,6 @@ const { body, check } = require('express-validator')
 const { showErrors } = require('../helpers/showErrors')
 
 const vUsuario = [
-  body('usuario')
-    .trim()
-    .exists()
-    .withMessage('Debe ingresar usuario')
-    .isLength({ min: 6, max: 12 })
-    .withMessage('El nombre de usuario debe tener entre 6 y 12 caracteres'),
   body('clave')
     .trim()
     .exists()
