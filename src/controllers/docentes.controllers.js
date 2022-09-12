@@ -3,11 +3,16 @@ const controller = {}
 
 controller.getDocentes = async (req, res) => {
   try {
-    const docentes = await Modelo.find({ estado: true })
-      .populate('usuario')
-      .populate('materias_docente')
+    const docentes = await Modelo.find({ estado: true }, {
+    })
+      .populate('usuario', {
+        clave: 0,
+
+      })
+      .populate('materias_docente', {
+        tipo: 0,
+      })
     
-    console.log(docentes)
     if (docentes) {
       return res.status(200).json(docentes)
     } else {

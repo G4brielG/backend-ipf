@@ -13,6 +13,10 @@ const docentesSchema = new Schema({
     type: Boolean,
     default: true
   }
+},
+{
+  timestamps: true,
+  versionKey: false
 })
 
 module.exports = model('docentes', docentesSchema)
