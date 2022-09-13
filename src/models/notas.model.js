@@ -10,8 +10,8 @@ const notasSchema = new Schema({
     ref: 'personas',
   },
   nota: {
-    type: number,
-    require: true
+    type: Number,
+    default: 0
   }
 },
   {

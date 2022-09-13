@@ -5,7 +5,6 @@ controller.getMaterias = async (req, res) => {
   try {
     const materias = await Modelo.find({ estado: true }, {__v: 0}).populate('carrera', {
       estado: 0,
-      __v: 0
     })
 
     if (materias) {

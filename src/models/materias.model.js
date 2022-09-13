@@ -10,6 +10,9 @@ const materiasSchema = new Schema({
     enum: ['anual', 'cuatrimestral'],
     required: true
   },
+  dias: [{
+    enum: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
+  }],
   carrera: [{
     type: Schema.Types.ObjectId,
     ref: 'carreras'

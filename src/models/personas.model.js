@@ -25,10 +25,12 @@ const personasSchema = new Schema({
   },
   correo: {
     type: String,
+    required: true,
     unique: true
   },
   clave: {
-    type: String
+    type: String,
+    required: true
   },
   telefono: {
     type: String,

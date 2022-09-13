@@ -1,6 +1,13 @@
 const { model, Schema } = require('mongoose')
 
 const cursosSchema = new Schema({
+  nivel_anio: {
+    type: Number,
+    require: true
+  },
+  ciclo_lectivo: {
+    type: Date.year // \\
+  },
   alumnos: [{
     type: Schema.Types.ObjectId,
     ref: 'personas'
@@ -8,6 +15,10 @@ const cursosSchema = new Schema({
   materias: [{
     type: Schema.Types.ObjectId,
     ref: 'materias',
+  }],
+  carrera: [{
+    type: Schema.Types.ObjectId,
+    ref: 'carreras'
   }],
   estado: {
     type: Boolean,

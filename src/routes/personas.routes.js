@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 // Controllers
-const { getUsuarios, getUsuario, postUsuario, putUsuario, deleteUsuario } = require('../controllers/usuarios.controllers')
+const { getUsuarios, getUsuario, postUsuario, putUsuario, deleteUsuario } = require('../controllers/personas.controllers')
 
 // Middlewares
 const { vUsuario } = require('../middleware/vUsuarios.middlewares')

@@ -1,9 +1,13 @@
 const { model, Schema } = require('mongoose')
 
 const asistenciasSchema = new Schema({
-  curso: {
+  materia: {
     type: Schema.Types.ObjectId,
-    ref: 'cursos'
+    ref: 'materias'
+  },
+  alumno: {
+    type: Schema.Types.ObjectId,
+    ref: 'personas'
   },
   asistencia: {
     enum: ['A', 'P']
