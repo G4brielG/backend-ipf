@@ -35,7 +35,7 @@ controller.getUsuario = async (req, res) => {
 
 controller.postUsuario = async (req, res) => {
   try {
-    const { apellidos, nombres, dni, sexo, direccion, clave } = req.body
+    const { apellidos, nombres, dni, sexo, direccion, telefono, rol, correo, clave } = req.body
     const newClave = await bcrypt.hash(clave, 10)
     const newUser = new Modelo({
       apellidos, nombres, dni, sexo, direccion, telefono, rol, correo, clave: newClave

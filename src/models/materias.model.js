@@ -11,7 +11,8 @@ const materiasSchema = new Schema({
     required: true
   },
   dias: [{
-    enum: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
+    type: String,
+    enum: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"]
   }],
   carrera: [{
     type: Schema.Types.ObjectId,

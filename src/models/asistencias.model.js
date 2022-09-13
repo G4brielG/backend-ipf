@@ -10,6 +10,7 @@ const asistenciasSchema = new Schema({
     ref: 'personas'
   },
   asistencia: {
+    type: String,
     enum: ['A', 'P']
   }
 },

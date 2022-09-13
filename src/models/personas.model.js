@@ -37,6 +37,7 @@ const personasSchema = new Schema({
     default: null
   },
   rol: {
+    type: String,
     enum: ['admin', 'docente', 'alumno']
   },
   estado: {

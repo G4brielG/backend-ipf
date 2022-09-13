@@ -58,7 +58,7 @@ controller.putCurso = async (req, res) => {
   }
 }
 
-controller.deleteCurso = async () => {
+controller.deleteCurso = async (req, res) => {
   try {
     const id = req.params.id
     await Modelo.findByIdAndUpdate(id, { estado: false })

@@ -58,7 +58,7 @@ controller.putAnuncio = async (req, res) => {
   }
 }
 
-controller.deleteAnuncio = async () => {
+controller.deleteAnuncio = async (req, res) => {
   try {
     const id = req.params.id
     await Modelo.findByIdAndUpdate(id, { estado: false })

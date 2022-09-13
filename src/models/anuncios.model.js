@@ -9,6 +9,7 @@ const anunciosSchema =  new Schema({
     type: String
   },
   tipo_anuncio: {
+    type: String,
     enum: ['general', 'carrera', 'materia']
   },
   carrera: {

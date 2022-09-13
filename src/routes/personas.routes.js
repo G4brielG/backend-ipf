@@ -4,13 +4,15 @@ const router = require('express').Router()
 const { getUsuarios, getUsuario, postUsuario, putUsuario, deleteUsuario } = require('../controllers/personas.controllers')
 
 // Middlewares
-const { vUsuario } = require('../middleware/vUsuarios.middlewares')
 const { validateLogin, validateAdmin } = require('../middleware/login.middlewares')
+
+// Validations
+const { vPersonas } = require('../validations/personas.validations')
 
 router.get('/', [validateLogin, validateAdmin], getUsuarios)
 router.get('/:id', [validateLogin], getUsuario)
-router.put('/:id', [validateLogin, vUsuario], putUsuario)
-router.post('/', [vUsuario], postUsuario)
+router.put('/:id', [validateLogin, vPersonas], putUsuario)
+router.post('/', [vPersonas], postUsuario)
 router.delete('/:id', [validateLogin, validateAdmin], deleteUsuario)
 
 module.exports = router

@@ -1,7 +1,7 @@
-const { body, check } = require('express-validator')
+const { body } = require('express-validator')
 const { showErrors } = require('../helpers/showErrors')
 
-const vUsuario = [
+const vPersonas = [
   body('clave')
     .trim()
     .exists()
@@ -23,12 +23,4 @@ const vUsuario = [
   }
 ]
 
-const vDeleteUsuario = () => {
-  return [
-    check('id', 'Id invalida')
-      .trim()
-      .isMongoId()
-  ]
-}
-
-module.exports = { vUsuario, vDeleteUsuario }
+module.exports = { vPersonas }

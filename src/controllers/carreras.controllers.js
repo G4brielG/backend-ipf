@@ -58,7 +58,7 @@ controller.putCarrera = async (req, res) => {
   }
 }
 
-controller.deleteCarrera = async () => {
+controller.deleteCarrera = async (req, res) => {
   try {
     const id = req.params.id
     await Modelo.findByIdAndUpdate(id, { estado: false })
