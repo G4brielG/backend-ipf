@@ -1,6 +1,6 @@
 const { model, Schema } = require('mongoose')
 
-const docentesSchema = new Schema({
+const personasSchema = new Schema({
   apellidos: {
     type: String,
     require: true
@@ -34,14 +34,17 @@ const docentesSchema = new Schema({
     type: String,
     default: null
   },
+  rol: {
+    enum: ['admin', 'docente', 'alumno']
+  },
   estado: {
     type: Boolean,
     default: true
-  },
-  // rol: {
-  //   type: String,
-  //   enum: ['admin', 'docente', 'alumno']
-  // }
+  }
+},
+{
+  timestamps: true,
+  versionKey: false
 })
 
-module.exports = model('usuarios', docentesSchema)
+module.exports = model('personas', personasSchema)

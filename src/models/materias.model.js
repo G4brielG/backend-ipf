@@ -14,6 +14,10 @@ const materiasSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'carreras'
   }]
+},
+{
+  timestamps: true,
+  versionKey: false
 })
 
 module.exports = model('materias', materiasSchema)

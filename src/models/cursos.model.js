@@ -1,11 +1,11 @@
 const { model, Schema } = require('mongoose')
 
-const docentesSchema = new Schema({
-  docente: {
+const cursosSchema = new Schema({
+  alumnos: [{
     type: Schema.Types.ObjectId,
     ref: 'personas'
-  },
-  materias_docente: [{
+  }],
+  materias: [{
     type: Schema.Types.ObjectId,
     ref: 'materias',
   }],
@@ -14,9 +14,8 @@ const docentesSchema = new Schema({
     default: true
   }
 },
-{
-  timestamps: true,
-  versionKey: false
-})
-
-module.exports = model('docentes', docentesSchema)
+  {
+    timestamps: true,
+    versionKey: false
+  })
+module.exports = model('cursos', cursosSchema)

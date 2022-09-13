@@ -1,4 +1,4 @@
-const Modelo = require('../models/usuarios.model')
+const Modelo = require('../models/personas.model')
 const bcryptjs = require('bcryptjs');
 const createJwt = require('../helpers/generar_jwt')
 const controller = {}

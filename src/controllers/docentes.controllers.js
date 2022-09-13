@@ -5,7 +5,7 @@ controller.getDocentes = async (req, res) => {
   try {
     const docentes = await Modelo.find({ estado: true }, {
     })
-      .populate('usuario', {
+      .populate('docente', {
         clave: 0,
 
       })
@@ -40,10 +40,10 @@ controller.getDocente = async (req, res) => {
 
 controller.postDocente = async (req, res) => {
   try {
-    const { usuario, materias } = req.body
+    const { docente, materias } = req.body
 
     const newDocente = new Modelo({
-      usuario, materias
+      docente, materias
     })
     await newDocente.save()
     return res.status(201).json({ message: 'El docente ha sido agregado correctamente' })
@@ -55,10 +55,10 @@ controller.postDocente = async (req, res) => {
 controller.putDocente = async (req, res) => {
   try {
     const id = req.params.id
-    const { usuario, materias } = req.body
+    const { docente, materias } = req.body
 
     await Modelo.findByIdAndUpdate(id, {
-      usuario, materias
+      docente, materias
     })
     return res.status(201).json({ message: 'Se actualizó correctamente' })
   } catch (error) {

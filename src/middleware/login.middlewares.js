@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Modelo = require('../models/usuarios.model')
+const Modelo = require('../models/personas.model')
 const middleware = {};
 
 middleware.validateLogin = async (req, res, next) => {

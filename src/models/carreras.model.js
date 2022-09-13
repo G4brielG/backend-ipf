@@ -15,5 +15,9 @@ const carrerasSchema = new Schema({
     type: Boolean,
     default: true
   }
+},
+{
+  timestamps: true,
+  versionKey: false
 }) 
 module.exports = model('carreras', carrerasSchema)

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const Modelo = require('../models/usuarios.model')
+const Modelo = require('../models/personas.model')
 const bcrypt = require('bcrypt')
 const controller = {}
 
@@ -38,7 +38,7 @@ controller.postUsuario = async (req, res) => {
     const { apellidos, nombres, dni, sexo, direccion, clave } = req.body
     const newClave = await bcrypt.hash(clave, 10)
     const newUser = new Modelo({
-      apellidos, nombres, dni, sexo, direccion, clave: newClave
+      apellidos, nombres, dni, sexo, direccion, telefono, rol, correo, clave: newClave
     })
     await newUser.save()
     return res.status(201).json({ message: 'El usuario ha sido creado correctamente' })
@@ -55,7 +55,7 @@ controller.putUsuario = async (req, res) => {
 
     if (id == user._id) {
       const newClave = await bcrypt.hash(clave, 10)
-      await Modelo.findByIdAndUpdate(id, { apellidos, nombres, dni, sexo, direccion, clave: newClave })
+      await Modelo.findByIdAndUpdate(id, { apellidos, nombres, dni, sexo, direccion, telefono, rol, correo, clave: newClave })
       return res.status(200).json({ message: 'Los datos han sido modificado correctamente' })
     } else {
       return res.status(203).json({ message: 'La información que solicita no está disponible' })
