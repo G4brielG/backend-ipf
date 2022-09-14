@@ -4,11 +4,15 @@ const router = require('express').Router()
 const { getMaterias, getMateria, postMateria, putMateria, deleteMateria } = require('../controllers/materias.controllers')
 
 // Middlewares
+const { validateLogin, validateAdmin } = require('../middleware/login.middlewares')
 
-router.get('/', getMaterias)
-router.get('/:id', getMateria)
-router.post('/', postMateria)
-router.put('/:id', putMateria)
-router.delete('/:id', deleteMateria)
+// Validarions
+const { vMaterias } = require('../validations/materias.validations')
+
+router.get('/', [validateLogin, validateAdmin], getMaterias)
+router.get('/:id', [validateLogin, validateAdmin], getMateria)
+router.post('/', [validateLogin, validateAdmin, vMaterias], postMateria)
+router.put('/:id', [validateLogin, validateAdmin, vMaterias], putMateria)
+router.delete('/:id', [validateLogin, validateAdmin], deleteMateria)
 
 module.exports = router

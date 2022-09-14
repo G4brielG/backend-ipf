@@ -40,6 +40,9 @@ const personasSchema = new Schema({
     type: String,
     enum: ['admin', 'docente', 'alumno']
   },
+  documentaciones: [{
+    type: String
+  }],
   estado: {
     type: Boolean,
     default: true

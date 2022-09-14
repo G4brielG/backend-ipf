@@ -6,7 +6,7 @@ const cursosSchema = new Schema({
     require: true
   },
   ciclo_lectivo: {
-    type: Date.year // \\
+    type: Date
   },
   alumnos: [{
     type: Schema.Types.ObjectId,
@@ -29,4 +29,5 @@ const cursosSchema = new Schema({
     timestamps: true,
     versionKey: false
   })
+
 module.exports = model('cursos', cursosSchema)

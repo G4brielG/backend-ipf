@@ -6,9 +6,11 @@ const carrerasSchema = new Schema({
     required: true
   },
   duracion: {
-    type: String
+    type: String,
+    required: true
   },
   carga_horaria: {
+    required: true,
     type: Number
   },
   estado: {

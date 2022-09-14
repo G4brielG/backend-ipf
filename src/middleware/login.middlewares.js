@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 const Modelo = require('../models/personas.model')
-const middleware = {};
+const middleware = {}
 
 middleware.validateLogin = async (req, res, next) => {
   try {
@@ -27,7 +27,7 @@ middleware.validateLogin = async (req, res, next) => {
   } catch (error) {
     res.status(500).json(error)
   }
-};
+}
 
 middleware.validateAdmin = async (req, res, next) => {
   const token = req.header('auth-token')
@@ -43,7 +43,7 @@ middleware.validateAdmin = async (req, res, next) => {
     return res.status(401).json({ message: 'No se encontró el usuario' })
   }
   return res.status(401).json({ message: 'Debes tener acceso de administrador para realizar esta acción' })
-};
+}
 
 middleware.validateDocente = async (req, res, next) => {
   const token = req.header('auth-token')
@@ -59,7 +59,7 @@ middleware.validateDocente = async (req, res, next) => {
     return res.status(401).json({ message: 'No se encontró el usuario' })
   }
   return res.status(401).json({ message: 'Debes tener acceso de docente para realizar esta acción' })
-};
+}
 
 middleware.validateAlumno = async (req, res, next) => {
   const token = req.header('auth-token')
@@ -75,6 +75,22 @@ middleware.validateAlumno = async (req, res, next) => {
     return res.status(401).json({ message: 'No se encontró el usuario' })
   }
   return res.status(401).json({ message: 'Debes tener acceso de alumno para realizar esta acción' })
-};
+}
+
+middleware.validateAdminDocente = async (req, res, next) => {
+  const token = req.header('auth-token')
+  const { id } = jwt.verify(token, process.env.FIRMA)
+
+  const user = await Modelo.findOne({ _id: id })
+
+  if (user) {
+    if (user.rol === 'admin' || user.rol === 'docente') {
+      return next()
+    }
+  } else {
+    return res.status(401).json({ message: 'No se encontró el usuario' })
+  }
+  return res.status(401).json({ message: 'Debes tener acceso de administrador o docente para realizar esta acción' })
+}
 
 module.exports = middleware
