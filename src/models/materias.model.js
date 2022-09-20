@@ -1,27 +1,70 @@
 const { model, Schema } = require('mongoose')
 
 const materiasSchema = new Schema({
-  nombre: {
-    type: String,
-    required: true
+  materia: {
+    nombre: {
+      type: String,
+      required: true
+    },
+    tipo: {
+      type: String,
+      enum: ['anual', 'cuatrimestral'],
+      required: true
+    },
+    dias: [{
+      type: String,
+      enum: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"],
+      required: true
+    }],
+    docentes: [{
+      docente: {
+        type: Schema.Types.ObjectId,
+        ref: 'personas',
+        required: true
+      },
+      cargo: {
+        type: String,
+        enum: ["titular", "auxiliar"],
+        required: true
+      }
+    }],
   },
-  tipo:{
-    type: String,
-    enum: ['anual', 'cuatrimestral'],
-    required: true
-  },
-  dias: [{
-    type: String,
-    enum: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"]
-  }],
-  carrera: [{
-    type: Schema.Types.ObjectId,
-    ref: 'carreras'
+ 
+  alumnos: [{
+    alumno: {
+      type: Schema.Types.ObjectId,
+      ref: 'personas',
+      required: true
+    },
+    notas: [{
+      nota: [{
+        examen: {
+          type: String,
+          enum: ["primer_parcial", "segundo_parcial", "primer_recup", "segundo_recup", "final"],
+          required: true
+        },
+        calificacion: {
+          type: Number,
+          default: 0
+        }
+      }],
+    }],
+  
+    asistencias: [{
+      asistencia: {
+        type: String,
+        enum: ['A', 'P']
+      },
+      fecha: {
+        type: Date,
+        default: Date.now()
+      }
+    }]
   }]
 },
-{
-  timestamps: true,
-  versionKey: false
-})
+  {
+    timestamps: true,
+    versionKey: false
+  })
 
 module.exports = model('materias', materiasSchema)

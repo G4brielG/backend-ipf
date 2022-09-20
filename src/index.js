@@ -14,11 +14,7 @@ app.use('/login', require('./routes/login.routes'))
 app.use('/personas', require('./routes/personas.routes'))
 app.use('/carreras', require('./routes/carreras.routes'))
 app.use('/materias', require('./routes/materias.routes'))
-app.use('/docentes', require('./routes/docentes.routes'))
-app.use('/cursos', require('./routes/cursos.routes'))
 app.use('/anuncios', require('./routes/anuncios.routes'))
-app.use('/asistencias', require('./routes/asistencias.routes'))
-app.use('/notas', require('./routes/notas.routes'))
 
 // Settings
 app.set('port', process.env.PORT || 4000)

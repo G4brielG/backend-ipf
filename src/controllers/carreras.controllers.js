@@ -32,10 +32,10 @@ controller.getCarrera = async (req, res) => {
 
 controller.postCarrera = async (req, res) => {
   try {
-    const {nombre, duracion, carga_horaria} = req.body
+    const {carrera, curso} = req.body
 
     const newCarrera = new Modelo({
-      nombre, duracion, carga_horaria
+      carrera, curso
     })
     await newCarrera.save()
     return res.status(201).json({ message: 'La carrera se ha agregado correctamente' })
@@ -47,10 +47,10 @@ controller.postCarrera = async (req, res) => {
 controller.putCarrera = async (req, res) => {
   try {
     const id = req.params.id
-    const { nombre, duracion, carga_horaria } = req.body
+    const { carrera, curso } = req.body
 
     await Modelo.findByIdAndUpdate(id, {
-      nombre, duracion, carga_horaria
+      carrera, curso
     })
     return res.status(201).json({ message: 'La carrera se ha actualizado correctamente' })
   } catch (error) {

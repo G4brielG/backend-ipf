@@ -20,9 +20,7 @@ controller.getMaterias = async (req, res) => {
 controller.getMateria = async (req, res) => {
   try {
     const id = req.params.id
-    const materia = await Modelo.find({ _id: id, estado: true }).populate('carrera', {
-      estado: 0,
-    })
+    const materia = await Modelo.find({ _id: id, estado: true })
 
     if (materia) {
       return res.status(200).json(materia)
@@ -36,10 +34,10 @@ controller.getMateria = async (req, res) => {
 
 controller.postMateria = async (req, res) => {
   try {
-    const { nombre, tipo, dias, carrera } = req.body
+    const { materia, notas, asistencias } = req.body
 
     const newMateria = new Modelo({
-      nombre, tipo, dias, carrera
+      materia, notas, asistencias
     })
     await newMateria.save()
     return res.status(201).json({ message: 'La materia se ha agregado correctamente' })
@@ -51,12 +49,12 @@ controller.postMateria = async (req, res) => {
 controller.putMateria = async (req, res) => {
   try {
     const id = req.params.id
-    const { nombre, tipo, dias, carrera } = req.body
+    const { nombre, tipo, dias } = req.body
 
     await Modelo.findByIdAndUpdate(id, {
-      nombre, tipo, dias, carrera
+      nombre, tipo, dias
     })
-    return res.status(201).json({ message: 'La carrera se ha actualizado correctamente' })
+    return res.status(201).json({ message: 'La materia se ha actualizado correctamente' })
   } catch (error) {
     return res.status(500).json(error)
   }

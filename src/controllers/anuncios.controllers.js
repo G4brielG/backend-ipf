@@ -32,10 +32,10 @@ controller.getAnuncio = async (req, res) => {
 
 controller.postAnuncio = async (req, res) => {
   try {
-    const { persona, anuncio, tipo_anuncio, carrera, materia } = req.body
+    const { anuncio, comentarios } = req.body
 
     const newAnuncio = new Modelo({
-      persona, anuncio, tipo_anuncio, carrera, materia
+      anuncio, comentarios
     })
     await newAnuncio.save()
     return res.status(201).json({ message: 'El anuncio ha sido publicado correctamente' })
@@ -47,10 +47,10 @@ controller.postAnuncio = async (req, res) => {
 controller.putAnuncio = async (req, res) => {
   try {
     const id = req.params.id
-    const { persona, anuncio, tipo_anuncio, carrera, materia } = req.body
+    const { anuncio, comentarios } = req.body
 
     await Modelo.findByIdAndUpdate(id, {
-      persona, anuncio, tipo_anuncio, carrera, materia
+      anuncio, comentarios
     })
     return res.status(201).json({ message: 'El anuncio se modificó correctamente' })
   } catch (error) {

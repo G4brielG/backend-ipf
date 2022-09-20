@@ -11,7 +11,7 @@ const { vMaterias } = require('../validations/materias.validations')
 
 router.get('/', [validateLogin, validateAdmin], getMaterias)
 router.get('/:id', [validateLogin, validateAdmin], getMateria)
-router.post('/', [validateLogin, validateAdmin, vMaterias], postMateria)
+router.post('/', postMateria)
 router.put('/:id', [validateLogin, validateAdmin, vMaterias], putMateria)
 router.delete('/:id', [validateLogin, validateAdmin], deleteMateria)
 

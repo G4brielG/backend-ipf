@@ -1,51 +1,61 @@
 const { model, Schema } = require('mongoose')
 
 const personasSchema = new Schema({
-  apellidos: {
-    type: String,
-    require: true
+  datos_personales: {
+    apellidos: {
+      type: String,
+      required: true
+    },
+    nombres: {
+      type: String,
+      required: true
+    },
+    dni: {
+      type: Number,
+      unique: true,
+      required: true
+    },
+    sexo: {
+      type: String,
+      enum: ['M', 'F'],
+      required: true
+    },
+    direccion: {
+      type: String,
+      required: true
+    },
+    correo: {
+      type: String,
+      unique: true,
+      required: true
+    },
+    telefono: {
+      type: String,
+      default: null
+    },
+    documentaciones: [{
+      type: String
+    }],
   },
-  nombres: {
-    type: String,
-    required: true
-  },
-  dni: {
-    type: Number,
-    require: true,
-    unique: true
-  },
-  sexo: {
-    type: String,
-    required: true,
-    enum: ['M', 'F']
-  },
-  direccion: {
-    type: String,
-    required: true
-  },
-  correo: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  clave: {
-    type: String,
-    required: true
-  },
-  telefono: {
-    type: String,
-    default: null
-  },
-  rol: {
-    type: String,
-    enum: ['admin', 'docente', 'alumno']
-  },
-  documentaciones: [{
-    type: String
-  }],
-  estado: {
-    type: Boolean,
-    default: true
+
+  usuario: {
+    nombre_usuario: {
+      type: String,
+      required: true
+    },
+    clave: {
+      type: String,
+      required: true
+    },
+    rol: {
+      type: String,
+      enum: ['admin', 'docente', 'alumno'],
+      required: true
+    },
+    estado: {
+      type: Boolean,
+      default: true
+    }
   }
 },
 {

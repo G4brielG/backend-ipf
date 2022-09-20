@@ -10,3 +10,5 @@ Expedientes
   5. <span style="color:orange">14-09-22</span> Agregué el atributo documentaciones en el modelo personas. <span style="color:green">✔</span><br>
   Realicé validaciones del esquema personas, carreras, materias, docentes. <span style="color:green">✔</span><br>
   Creé un middleware para validar roles AdminDocentes. <span style="color:green">✔</span>
+  6. <span style="color:orange">20-09-22</span> Reemplanteé el modelo de la bd, en el modelo de materias agregué notas y asistencias de los alumnos, en el modelo de carreras incorporé el modelo de cursos, al modelo docentes lo incorporé en materias. <br>
+  modelos actuales: Anuncios, carreras, materias y personas
