@@ -35,13 +35,37 @@ controller.getUsuario = async (req, res) => {
 
 controller.postUsuario = async (req, res) => {
   try {
-    const { apellidos, nombres, dni, sexo, direccion, telefono, rol, correo, clave } = req.body
-    const newClave = await bcrypt.hash(clave, 10)
+    const { apellidos, nombres, dni, sexo, direccion, correo, telefono, documentaciones, rol } = req.body
     const newUser = new Modelo({
-      apellidos, nombres, dni, sexo, direccion, telefono, rol, correo, clave: newClave
+      apellidos, nombres, dni, sexo, direccion, correo, telefono, documentaciones, rol
     })
     await newUser.save()
     return res.status(201).json({ message: 'El usuario ha sido creado correctamente' })
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+}
+
+controller.updateClave = async () => {
+  try {
+    const token = req.header('auth-token')
+    const { id } = jwt.verify(token, process.env.FIRMA)
+    const user = await Modelo.findById(id)
+
+    if (user) {
+      const { clave, old_clave } = req.body
+      const validation = bcrypt.compareSync(old_clave, user.clave)
+      
+      if (validation) {
+        const hashClave = await bcrypt.hash(clave, 10)
+        await Modelo.findByIdAndUpdate(req.params.id, { clave: hashClave })
+        return res.status(201).json({ message: 'Se ha modificado la contraseña' })
+      } else {
+        return res.status(400).json({ message: 'La contraseña es incorrecta' })
+      }
+    } else {
+      return res.status(400).json({ message: 'No se ha encontrado el usuario' })
+    }
   } catch (error) {
     return res.status(500).json(error)
   }
@@ -51,11 +75,10 @@ controller.putUsuario = async (req, res) => {
   try {
     const token = req.header('auth-token')
     const { id } = jwt.verify(token, process.env.FIRMA)
-    const user = await Modelo.findById(req.params.id)
+    const user = await Modelo.findById(id)
 
     if (id == user._id) {
-      const newClave = await bcrypt.hash(clave, 10)
-      await Modelo.findByIdAndUpdate(id, { apellidos, nombres, dni, sexo, direccion, telefono, rol, correo, clave: newClave })
+      await Modelo.findByIdAndUpdate(id, { apellidos, nombres, dni, sexo, direccion, correo, telefono, documentaciones, rol })
       return res.status(200).json({ message: 'Los datos han sido modificado correctamente' })
     } else {
       return res.status(203).json({ message: 'La información que solicita no está disponible' })

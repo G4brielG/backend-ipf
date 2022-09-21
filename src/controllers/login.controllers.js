@@ -10,12 +10,12 @@ controller.login = async (req, res) => {
     const user = await Modelo.findOne({ correo: correo })
     if (user) {
       if (user.estado) {
-        const validation = bcryptjs.compareSync(clave, user.clave) || clave === user.clave
+        const validation = bcryptjs.compareSync(clave, user.clave)
 
         if (validation) {
-          const { correo: correo, _id, nombres } = user
+          const { _id } = user
           const token = await createJwt(_id)
-          return res.status(200).json({ message: `Bienvenido ${nombres}` , user: { token } })
+          return res.status(200).json({ user: { token } })
         }
 
         return res.status(400).json({ message: 'Contraseña incorrecta' })
