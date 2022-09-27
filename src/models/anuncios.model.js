@@ -6,6 +6,10 @@ const anunciosSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'personas'
     },
+    fecha_anuncio: {
+      type: Date,
+      default: Date.now()
+    },
     anuncio: {
       type: String
     },

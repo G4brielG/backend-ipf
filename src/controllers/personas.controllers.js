@@ -18,12 +18,8 @@ controller.getUsuarios = async (req, res) => {
 
 controller.getUsuario = async (req, res) => {
   try {
-    const token = req.header('auth-token')
-    const { id } = jwt.verify(token, process.env.FIRMA)
     const user = await Modelo.findById(req.params.id)
-    
-    // un usuario puede ver sus datos
-    if(id == user._id) {
+    if(user._id) {
         return res.status(200).json(user)
     } else {
       return res.status(203).json({ message: 'La información que solicita no está disponible' })

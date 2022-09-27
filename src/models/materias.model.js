@@ -28,6 +28,10 @@ const materiasSchema = new Schema({
         required: true
       }
     }],
+    estado: {
+      type: Boolean,
+      default: true
+    }
   },
  
   alumnos: [{
@@ -50,10 +54,10 @@ const materiasSchema = new Schema({
       }],
     }],
   
-    asistencias: [{
-      asistencia: {
+    inasistencias: [{
+      inasistencia: {
         type: String,
-        enum: ['A', 'P']
+        enum: ['A']
       },
       fecha: {
         type: Date,

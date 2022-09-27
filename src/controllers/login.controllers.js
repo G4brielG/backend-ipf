@@ -1,11 +1,9 @@
 const Modelo = require('../models/personas.model')
 const bcryptjs = require('bcryptjs');
-const createJwt = require('../helpers/generar_jwt')
+const createJwt = require('../helpers/createJwt')
 const controller = {}
-
 controller.login = async (req, res) => {
   const { correo, clave } = req.body
-
   try {
     const user = await Modelo.findOne({ correo: correo })
     if (user) {

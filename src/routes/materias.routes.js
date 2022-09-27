@@ -12,7 +12,7 @@ const { vMaterias } = require('../validations/materias.validations')
 router.get('/', [validateLogin, validateAdmin], getMaterias)
 router.get('/:id', [validateLogin, validateAdmin], getMateria)
 router.post('/', postMateria)
-router.put('/:id', [validateLogin, validateAdmin, vMaterias], putMateria)
+router.put('/:id', [validateLogin, validateAdmin], putMateria)
 router.delete('/:id', [validateLogin, validateAdmin], deleteMateria)
 
 module.exports = router

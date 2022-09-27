@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const userSchema = require('../models/usuario.model')
+const Modelo = require('../models/personas.model')
 require('dotenv').config()
 
 const validarToken = async (req, res, next) => {
@@ -10,13 +10,11 @@ const validarToken = async (req, res, next) => {
 
   try {
     const { id } = jwt.verify(token, process.env.FIRMA)
-    const datosDeUsuario = await userSchema.findOne({ _id: id, estado: true })
+    const usuario = await Modelo.findOne({ _id: id, estado: true })
 
-    if (!datosDeUsuario) {
+    if (!usuario) {
       return res.status(400).json('Token invalido')
     }
-
-    req.rol = datosDeUsuario.rol
     next()
   } catch (error) {
     return res.status(500).json(error)

@@ -34,10 +34,10 @@ controller.getMateria = async (req, res) => {
 
 controller.postMateria = async (req, res) => {
   try {
-    const { materia, notas, asistencias } = req.body
+    const { materia, notas, inasistencias } = req.body
 
     const newMateria = new Modelo({
-      materia, notas, asistencias
+      materia, notas, inasistencias
     })
     await newMateria.save()
     return res.status(201).json({ message: 'La materia se ha agregado correctamente' })
@@ -49,10 +49,10 @@ controller.postMateria = async (req, res) => {
 controller.putMateria = async (req, res) => {
   try {
     const id = req.params.id
-    const { nombre, tipo, dias } = req.body
+    const { materia, notas, inasistencias } = req.body
 
     await Modelo.findByIdAndUpdate(id, {
-      nombre, tipo, dias
+      materia, notas, inasistencias
     })
     return res.status(201).json({ message: 'La materia se ha actualizado correctamente' })
   } catch (error) {
