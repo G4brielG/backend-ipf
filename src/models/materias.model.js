@@ -56,8 +56,8 @@ const materiasSchema = new Schema({
   
     inasistencias: [{
       inasistencia: {
-        type: String,
-        enum: ['A']
+        type: Boolean,
+        default: true
       },
       fecha: {
         type: Date,

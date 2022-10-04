@@ -3,9 +3,7 @@ const controller = {}
 
 controller.getMaterias = async (req, res) => {
   try {
-    const materias = await Modelo.find({ estado: true }).populate('carrera', {
-      estado: 0,
-    })
+    const materias = await Modelo.find({ estado: true })
 
     if (materias) {
       return res.status(200).json(materias)

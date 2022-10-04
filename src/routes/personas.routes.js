@@ -12,7 +12,7 @@ const { vPersonas } = require('../validations/personas.validations')
 router.get('/', [validateLogin, validateAdmin], getUsuarios)
 router.get('/:id', [validateLogin], getUsuario)
 router.put('/:id', [validateLogin, vPersonas], putUsuario)
-router.purge('/cambiar_clave', updateClave)
+router.put('/cambiar_clave', updateClave)
 router.post('/', [vPersonas], postUsuario)
 router.delete('/:id', [validateLogin, validateAdmin], deleteUsuario)
 

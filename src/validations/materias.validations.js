@@ -17,10 +17,6 @@ const vMaterias = [
     .withMessage('Debe ingresar los dias que se dicta la materia')
     .isIn(['Lunes', 'Martes', 'Miércoles,', 'Jueves', 'Viernes'])
     .withMessage('Solo se permite de lunes a viernes'),
-  body('carrera')
-    .trim()
-    .exists()
-    .withMessage('Debe ingresar a que carrera pertenece la materia'),
   (req, res, next) => {
     showErrors(req, res, next)
   }
