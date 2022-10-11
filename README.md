@@ -13,9 +13,12 @@ Expedientes
   6. <span style="color:orange">20-09-22</span> Reemplanteé el modelo de la bd, en el modelo de materias agregué notas y asistencias de los alumnos, en el modelo de carreras incorporé el modelo de cursos, al modelo docentes lo incorporé en materias. <br>
   modelos actuales: Anuncios, carreras, materias y personas
   7. <span style="color:orange">21-09-22</span> Agregué controlador y ruta para cambio de contraseña
-  8. <span style="color:orange">05-09-22</span> Listar:
-    - materias y notas de un alumno
-    - inasistencia de un alumno
-    - materias que dicta un docente
-    - alumnos de una materia
-    - alumnos por curso
+  8. <span style="color:orange">04-10-22</span> Listar:
+    materias, notas e inasistencias de un alumno. <span style="color:green">✔</span>
+    materias que dicta un docente. <span style="color:green">✔</span>
+    anuncios por materias. <span style="color:green">✔</span>
+    <span style="color:orange">06-10-22</span> Tarea finalizada
+  9. <span style="color:orange">11-10-22</span> controladores:
+  Actualizar una nota específica de un alumno. <span style="color:green">✔</span>
+  Agregar una nueva nota a un alumno . <span style="color:green">✔</span>
+  Ruta para agregar una nota. <span style="color:green">✔</span>

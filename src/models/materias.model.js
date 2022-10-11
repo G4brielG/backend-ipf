@@ -41,23 +41,18 @@ const materiasSchema = new Schema({
       required: true
     },
     notas: [{
-      nota: [{
-        examen: {
-          type: String,
-          enum: ["primer_parcial", "segundo_parcial", "primer_recup", "segundo_recup", "final"],
-          required: true
-        },
-        calificacion: {
-          type: Number,
-          default: 0
-        }
-      }],
+      examen: {
+        type: String,
+        enum: ["primer_parcial", "segundo_parcial", "primer_recup", "segundo_recup", "final"],
+      },
+      calificacion: {
+        type: Number,
+        default: 0
+      }
     }],
-  
     inasistencias: [{
       inasistencia: {
-        type: Boolean,
-        default: true
+        type: Boolean
       },
       fecha: {
         type: Date,

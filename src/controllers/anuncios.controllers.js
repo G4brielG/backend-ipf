@@ -30,6 +30,21 @@ controller.getAnuncio = async (req, res) => {
   }
 }
 
+controller.getAnuncioMateria = async (req, res) => {
+  try {
+    const id = req.params.id
+    const anuncio = await Modelo.find({ _id: id, estado: true })
+
+    if (anuncio) {
+      return res.status(200).json(anuncio)
+    } else {
+      return res.status(400).json({ message: 'No se encontró el anuncio en la base de datos' })
+    }
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+}
+
 controller.postAnuncio = async (req, res) => {
   try {
     const { anuncio, comentarios } = req.body

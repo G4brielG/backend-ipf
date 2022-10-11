@@ -1,0 +1,21 @@
+{
+  "materia": {
+    "nombre": "Análisis de la realidad formoseña",
+      "tipo": "cuatrimestral",
+        "dias": ["Jueves"],
+          "docentes": [{
+            "docente": "631e6619bb5a88b84b8b7b3e",
+            "cargo": "titular"
+          }]
+  },
+  "alumnos": [{
+    "alumno": "6320c8ffb383b7017865f1c0",
+    "notas": [{
+      "examen": "primer_parcial",
+      "calificacion": 80
+    }],
+    "inasistencias": [{
+      "inasistencia": false
+    }]
+  }]
+}
