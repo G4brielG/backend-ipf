@@ -22,3 +22,9 @@ Expedientes
   Actualizar una nota específica de un alumno. <span style="color:green">✔</span>
   Agregar una nueva nota a un alumno . <span style="color:green">✔</span>
   Ruta para agregar una nota. <span style="color:green">✔</span>
+  10. <span style="color:orange">18-10-22</span>
+    Inasistencias por alumno y por materia
+    agregar inasistencia a un alumno
+    Cantidad de inasistencias de un alumno por materia
+    Anuncios por materias
+    alumnos por curso
