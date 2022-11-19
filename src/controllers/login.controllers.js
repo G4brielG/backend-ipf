@@ -4,8 +4,10 @@ const createJwt = require('../helpers/createJwt')
 const controller = {}
 controller.login = async (req, res) => {
   const { correo, clave } = req.body
+  console.log(req.body)
   try {
     const user = await Modelo.findOne({ correo: correo })
+    console.log(user)
     if (user) {
       if (user.estado) {
         const validation = bcryptjs.compareSync(clave, user.clave)

@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const cors = require('cors')
 require('./database')
 require('dotenv').config()
 
@@ -8,6 +9,9 @@ require('dotenv').config()
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: false }))
+app.use(cors({
+  origin: '*'
+}))
 
 // Rutes
 app.use('/login', require('./routes/login.routes'))

@@ -45,6 +45,23 @@ controller.getMateriasAlumno = async (req, res) => {
   }
 }
 
+controller.getInasistencia = async () => {
+  try {
+    const id = req.params.id
+    const { idMateria } = req.body 
+    const Inasistencias = await Modelo.find({ alumnos: { $elemMatch: { alumno: id } }, __id: idMateria, estado: true })
+    const { inasistencias } = Inasistencias
+    
+    if(Inasistencias){
+      return res.status(200).json(inasistencias)
+    } else {
+      return res.status(400).json({ message: 'El alumno no está asignado a ninguna materia' })
+    }
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+}
+
 controller.getMateriasDocente = async (req, res) => {
   try {
     const id = req.params.id
@@ -92,7 +109,7 @@ controller.postNota = async (req, res) => {
     const {notas:notita} = req.body;
 
     const alumno = await Modelo.findOne({ alumnos: { $elemMatch: { alumno: idAlumno } }})
-    const {alumnos} = alumno;
+    const { alumnos } = alumno;
 
     alumno.alumnos[0].notas = alumno.alumnos[0].notas.concat(notita);
     alumno.save()
