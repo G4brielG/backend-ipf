@@ -7,7 +7,7 @@ controller.login = async (req, res) => {
   console.log(req.body)
   try {
     const user = await Modelo.findOne({ correo: correo })
-    console.log(user)
+
     if (user) {
       if (user.estado) {
         const validation = bcryptjs.compareSync(clave, user.clave)
@@ -15,12 +15,12 @@ controller.login = async (req, res) => {
         if (validation) {
           const { _id } = user
           const token = await createJwt(_id)
-          return res.status(200).json({ user: { token } })
+          return res.status(200).json({token: token})
         }
 
-        return res.status(400).json({ message: 'Contraseña incorrecta' })
+        return res.status(400).json({ message: 'Usuario o clave incorrecta' })
       }
-      return res.status(400).json({ message: 'El usuario está inhabilitado' })
+      return res.status(400).json({ message: 'Usuario o clave incorrecta' })
     }
     return res.status(400).json({ message: 'Usuario no encontrado' })
   } catch (error) {
